@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Repair.Desktop
+namespace Framework
 {
     /// <summary>
     /// The main class.
@@ -13,7 +13,7 @@ namespace Repair.Desktop
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new MainGame())
                 game.Run();
         }
     }
