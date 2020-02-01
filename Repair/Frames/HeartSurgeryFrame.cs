@@ -6,7 +6,7 @@ using Nez.Sprites;
 using System.Collections.Generic;
 using Repair.Framework;
 
-namespace Repair.Frames
+namespace Frames
 {
     public class HeartSurgeryFrame : DrawFrame
     {
@@ -114,7 +114,7 @@ namespace Repair.Frames
         }
 
         public void ManPan() {
-            Vector2 translate = new Vector2(0,-2.0f);
+            Vector2 translate = new Vector2(0,-5.0f);
             manEntity.Transform.SetPosition(manEntity.Transform.Position + translate);
             surgeryLineEntity.Transform.SetPosition(surgeryLineEntity.Transform.Position + translate);
             ticks1++;
@@ -129,7 +129,7 @@ namespace Repair.Frames
             pupil2Entity.Transform.SetPosition(pupil2point + translate3);
             if (manEntity.Transform.Position.Y < 400) { 
                 stage = SurgeryStage.CUT;
-                base.SetUpDrawArea(0.15f, new Vector2(318, 82), new Vector2(413, 418));
+                base.SetUpDrawArea(0.4f, new Vector2(318, 82), new Vector2(413, 418));
             }
         }
 
@@ -143,5 +143,57 @@ namespace Repair.Frames
 
         }
 
+        int splatterCount;
+
+        public override void OnNodeAdded(Vector2 NodePos)
+        {
+            if(splatterCount % 2 == 0)
+            {
+                var splatterTexture = GetRandomBloodSplatter();
+                var splat = CreateEntity("Splatter" + (splatterCount++).ToString());
+                splat.AddComponent(new SpriteRenderer(splatterTexture));
+                splat.Transform.Position = NodePos;
+                splat.Transform.SetScale(0.2f);
+            }
+            else
+            {
+                splatterCount++;
+            }
+        }
+
+        List<string> masterSplatters = new List<string> { "drop0", "drop1", "drop2", "drop3" };
+        List<string> splatters = new List<string> { "drop0", "drop1", "drop2", "drop3"};
+
+        private Texture2D GetRandomBloodSplatter()
+        {
+            string splatter;
+            if (splatters.Count > 1)
+            {
+                splatters.Shuffle();
+                splatter = splatters[0];
+                splatters.RemoveAt(0);
+            }
+            else
+            {
+                splatter = splatters[0];
+                splatters = masterSplatters;
+            }
+            return Core.Scene.Content.Load<Texture2D>(splatter);
+        }
+
+        private static System.Random rng = new System.Random();
+
+        public void Shuffle(List<string> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                string value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }

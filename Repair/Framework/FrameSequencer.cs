@@ -23,13 +23,15 @@ namespace Framework
             }
             else if (frames.Count == 0)
             {
-                return new TitleFrame("error");
+                return new TitleFrame("title_died");
             }
             return frames.Dequeue();
         }
 
         private void LoadFrameSequence()
         {
+            frames.Enqueue(new HeartSurgeryFrame());
+            return;
             frames.Enqueue(new TitleFrame("title_repair"));
             frames.Enqueue(new TitleFrame("title_job_handiman"));
             frames.Enqueue(new TitleFrame("title_hangpainting"));

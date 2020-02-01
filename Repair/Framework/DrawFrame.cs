@@ -7,18 +7,14 @@ using Nez.Sprites;
 using System.Collections.Generic;
 namespace Repair.Framework
 {
-    public class DrawFrame : Frame
+    public abstract class DrawFrame : Frame
     {
         List<Vector2> nodes = new List<Vector2>();
         Vector2 MinBox, MaxBox;
-        static float nodeSize = 10.0f;
+        readonly float nodeSize = 15.0f;
         int MaxNumber;
         float percentageToComplete;
         bool drawActive = false;
-
-        public DrawFrame()
-        {
-        }
 
         public void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
         {
@@ -48,6 +44,7 @@ namespace Repair.Framework
                 if (!overlapped)
                 {
                     nodes.Add(Input.MousePosition);
+                    OnNodeAdded(Input.MousePosition);
                 }
 
                 if (nodes.Count > MaxNumber * percentageToComplete)
@@ -61,6 +58,8 @@ namespace Repair.Framework
         {
             drawActive = false;
         }
+
+        public abstract void OnNodeAdded(Vector2 NodePos);
     }
 }
 
