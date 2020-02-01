@@ -13,7 +13,7 @@
     <AssemblyName>Repair</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +52,7 @@
     <Compile Include="Framework\TitleFrame.cs" />
     <Compile Include="Frames\TurnItOnAndOffFrame.cs" />
     <Compile Include="Framework\FrameSequencer.cs" />
+    <Compile Include="Framework\PumpFrame.cs" />
     <Compile Include="Frames\BalanceFrame.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +61,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="Nez">
-      <HintPath>..\Nez\Nez.Portable\bin\Debug\Nez.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -126,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\NezDefaultBMFont.xnb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nez\Nez.Portable\Nez.csproj">
+      <Project>{32098544-A206-4C42-816B-34B4C8346EC7}</Project>
+      <Name>Nez</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

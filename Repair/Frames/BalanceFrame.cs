@@ -16,23 +16,25 @@ namespace Repair.Frames
 
         Entity paintingEntity, levelEntity, bubbleEntity;
 
-        public BalanceFrame()
+        public override void Init()
         {
+            base.Init();
+
             var scene = Core.Scene;
             var level = scene.Content.Load<Texture2D>("level");
-            levelEntity = scene.CreateEntity("level");
+            levelEntity = CreateEntity("level");
             levelEntity.AddComponent(new SpriteRenderer(level));
             levelEntity.Transform.Position = new Vector2(1000, 400);
             levelEntity.Transform.SetScale(0.15f);
 
             var bubble = scene.Content.Load<Texture2D>("bubble");
-            bubbleEntity = scene.CreateEntity("bubble");
+            bubbleEntity = CreateEntity("bubble");
             bubbleEntity.AddComponent(new SpriteRenderer(bubble));
             bubbleEntity.Transform.Position = new Vector2(985, 400);
             bubbleEntity.Transform.SetScale(0.15f);
 
             var squid = scene.Content.Load<Texture2D>("squid");
-            paintingEntity = scene.CreateEntity("painting");
+            paintingEntity = CreateEntity("painting");
             paintingEntity.AddComponent(new SpriteRenderer(squid));
             paintingEntity.Transform.Position = new Vector2(400, 400);
             paintingEntity.Transform.SetScale(paintingScale);
@@ -94,7 +96,7 @@ namespace Repair.Frames
                 paintingEntity.Transform.SetScale(paintingScale);
             } else if (paintingScale >= 3.0f)
             {
-                Finish();
+                OnFinish();
             }
         }
     }

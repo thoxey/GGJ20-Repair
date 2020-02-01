@@ -2,9 +2,6 @@
 
 namespace Framework
 {
-
-
-
     public class FrameManager : SceneComponent
     {
         public Frame CurrentFrame;

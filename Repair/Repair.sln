@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repair", "Repair.csproj", "{905B6B3B-33B1-49FB-B691-AE30F88CB4F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nez", "..\Nez\Nez.Portable\Nez.csproj", "{E7FE8ADA-48B2-4AD3-8469-EBF24484A3B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nez", "..\Nez\Nez.Portable\Nez.csproj", "{32098544-A206-4C42-816B-34B4C8346EC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,9 @@ Global
 		{905B6B3B-33B1-49FB-B691-AE30F88CB4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{905B6B3B-33B1-49FB-B691-AE30F88CB4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{905B6B3B-33B1-49FB-B691-AE30F88CB4F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7FE8ADA-48B2-4AD3-8469-EBF24484A3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7FE8ADA-48B2-4AD3-8469-EBF24484A3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7FE8ADA-48B2-4AD3-8469-EBF24484A3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7FE8ADA-48B2-4AD3-8469-EBF24484A3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32098544-A206-4C42-816B-34B4C8346EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32098544-A206-4C42-816B-34B4C8346EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32098544-A206-4C42-816B-34B4C8346EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32098544-A206-4C42-816B-34B4C8346EC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
