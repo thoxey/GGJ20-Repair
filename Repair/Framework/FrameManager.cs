@@ -1,29 +1,33 @@
-﻿using System;
-using Nez;
-using Repair.Frames;
-using System.Collections.Generic;
+﻿using Nez;
 
 namespace Framework
 {
+
+
+
     public class FrameManager : SceneComponent
     {
-        public int CurrentFrame = 0;
+        public Frame CurrentFrame;
 
-        public List<Frame> frames = new List<Frame>();
+        private FrameSequencer frameSequencer;
 
         public override void OnEnabled()
         {
             base.OnEnabled();
-
-            frames.Add(new BalanceFrame());
+            frameSequencer = new FrameSequencer();
+            LoadNextFrame();
         }
 
         public override void Update()
         {
-            if (Input.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Space) || (CurrentFrame < frames.Count && frames[CurrentFrame].IsFinished()))
-                CurrentFrame++;
-            else if (CurrentFrame < frames.Count)
-                frames[CurrentFrame].Update();
+            CurrentFrame?.Update();
+        }
+
+        private void LoadNextFrame()
+        {
+            CurrentFrame = frameSequencer.GetNextFrame();
+            CurrentFrame.Init();
+            CurrentFrame.Finish += LoadNextFrame;
         }
     }
 }

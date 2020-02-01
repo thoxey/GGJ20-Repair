@@ -21,37 +21,39 @@ namespace Repair.Frames
         }
         ComputerState state;
 
-        public TurnItOnAndOffFrame()
+        public override void Init()
         {
+            base.Init();
+
             var scene = Core.Scene;
             var computer = scene.Content.Load<Texture2D>("computer");
-            computerEntity = scene.CreateEntity("computer");
+            computerEntity = CreateEntity("computer");
             computerEntity.AddComponent(new SpriteRenderer(computer));
             computerEntity.Transform.Position = new Vector2(400, 400);
             computerEntity.Transform.SetScale(0.2f);
 
 
             var button = scene.Content.Load<Texture2D>("power");
-            buttonEntity = scene.CreateEntity("button");
+            buttonEntity = CreateEntity("button");
             buttonEntity.AddComponent(new SpriteRenderer(button));
             buttonEntity.Transform.Position = new Vector2(620, 270);
             buttonEntity.Transform.SetScale(0.12f);
 
             var loadingIcon = scene.Content.Load<Texture2D>("loading");
-            loadingIconEntity = scene.CreateEntity("loading");
+            loadingIconEntity = CreateEntity("loading");
             loadingIconEntity.AddComponent(new SpriteRenderer(loadingIcon));
             loadingIconEntity.Transform.Position = new Vector2(285, 320);
             loadingIconEntity.Transform.SetScale(0.12f);
             loadingIconEntity.SetEnabled(false);
 
             var error = scene.Content.Load<Texture2D>("error");
-            errorEntity = scene.CreateEntity("error");
+            errorEntity = CreateEntity("error");
             errorEntity.AddComponent(new SpriteRenderer(error));
             errorEntity.Transform.Position = new Vector2(285, 320);
             errorEntity.Transform.SetScale(0.15f);
 
             var profile = scene.Content.Load<Texture2D>("profile");
-            profileEntity = scene.CreateEntity("profile");
+            profileEntity = CreateEntity("profile");
             profileEntity.AddComponent(new SpriteRenderer(profile));
             profileEntity.Transform.Position = new Vector2(285, 320);
             profileEntity.Transform.SetScale(0.12f);
@@ -99,10 +101,9 @@ namespace Repair.Frames
                 loadingTicks++;
                 if(loadingTicks > 200)
                 {
-                    Finish();
+                    OnFinish();
                 }
             }
         }
-
     }
 }

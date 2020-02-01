@@ -9,13 +9,13 @@ namespace Framework
 
         private Action<ITimer> Timeout;
 
-        protected TimedFrame() : base()
+        public override void Init()
         {
-
+            base.Init();
             Timeout += OnTimeout;
             Core.Schedule(frameTime, false, Timeout);
         }
 
-        protected abstract void OnTimeout(ITimer timer);
+        protected void OnTimeout(ITimer timer) => OnFinish();
     }
 }

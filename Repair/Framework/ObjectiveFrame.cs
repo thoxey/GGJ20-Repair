@@ -5,13 +5,16 @@ namespace Framework
 {
     public abstract class ObjectiveFrame : Frame
     {
-        private Action ObjectiveComplete;
+        public Action ObjectiveComplete;
 
-        protected ObjectiveFrame() : base()
+        protected override void Init()
         {
-            ObjectiveComplete += OnObjectiveComplete;
+            base.Init();
         }
 
-        protected abstract void OnObjectiveComplete();
+        protected void OnObjectiveComplete()
+        {
+            ObjectiveComplete.Invoke();
+        }
     }
 }
