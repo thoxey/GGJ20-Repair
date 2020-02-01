@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Nez;
 using Nez.Sprites;
 
-namespace Repair.Frames
+namespace Frames
 {
     public class PaintingBalanceFrame : BalanceFrame
     {
