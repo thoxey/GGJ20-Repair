@@ -7,8 +7,11 @@ namespace Framework
     {
         public Frame CurrentFrame;
 
-        public FrameManager()
+        public override void OnEnabled()
         {
+            base.OnEnabled();
+
+            CurrentFrame = new TitleFrame("Pizza Wizard");
         }
 
         public override void Update()
@@ -21,7 +24,7 @@ namespace Framework
 
         public void PrepareNextFrame()
         {
-            CurrentFrame.Finish();
+            //CurrentFrame.Finish();
         }
     }
 }
