@@ -1,30 +1,29 @@
 ﻿using System;
 using Nez;
+using Repair.Frames;
+using System.Collections.Generic;
 
 namespace Framework
 {
     public class FrameManager : SceneComponent
     {
-        public Frame CurrentFrame;
+        public int CurrentFrame = 0;
+
+        public List<Frame> frames = new List<Frame>();
 
         public override void OnEnabled()
         {
             base.OnEnabled();
 
-            CurrentFrame = new TitleFrame("Pizza Wizard");
+            frames.Add(new TurnItOnAndOffFrame());
         }
 
         public override void Update()
         {
-            if (Input.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
-                PrepareNextFrame();
-            else
-                CurrentFrame?.Update();
-        }
-
-        public void PrepareNextFrame()
-        {
-            //CurrentFrame.Finish();
+            if (Input.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Space) || (CurrentFrame < frames.Count && frames[CurrentFrame].IsFinished()))
+                CurrentFrame++;
+            else if (CurrentFrame < frames.Count)
+                frames[CurrentFrame].Update();
         }
     }
 }

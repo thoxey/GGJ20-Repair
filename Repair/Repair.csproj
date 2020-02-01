@@ -114,6 +114,11 @@
       <Link>MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="assets\computer.png" />
+    <None Include="assets\error.png" />
+    <None Include="assets\loading.png" />
+    <None Include="assets\power.png" />
+    <None Include="assets\profile.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Framework\" />

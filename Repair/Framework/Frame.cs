@@ -6,6 +6,8 @@ namespace Framework
 {
     public abstract class Frame
     {
+        private bool isFinished = false;
+
         protected Frame()
         {
 
@@ -24,8 +26,12 @@ namespace Framework
 
         public virtual void Finish()
         {
-
+            isFinished = true;
         }
 
+        public bool IsFinished()
+        {
+            return isFinished;
+        }
     }
 }
