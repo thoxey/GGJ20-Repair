@@ -47,35 +47,39 @@ namespace Repair.Frames
             manEntity.Transform.Position = new Vector2(400, 1000);
             manEntity.Transform.SetScale(0.5f);
 
+
+
+            var cavity1 = scene.Content.Load<Texture2D>("cavity");
+            cavity1Entity = CreateEntity("cavity1");
+            cavity1Entity.AddComponent(new SpriteRenderer(cavity1));
+            cavity1Entity.Transform.Position = new Vector2(370, 260);
+            cavity1Entity.Transform.SetScale(0.2f);
+            cavity1Entity.SetEnabled(false);
+
+            var cavity2 = scene.Content.Load<Texture2D>("cavity2");
+            cavity2Entity = CreateEntity("cavity2");
+            cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
+            cavity2Entity.Transform.Position = new Vector2(370, 260);
+            cavity2Entity.Transform.SetScale(0.2f);
+            cavity2Entity.SetEnabled(false);
+
             //var leftHeart = scene.Content.Load<Texture2D>("leftheart");
             //leftHeartEntity = CreateEntity("leftHeart");
             //leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
             //leftHeartEntity.Transform.Position = new Vector2(400, 400);
-            //leftHeartEntity.Transform.SetScale(0.5f);
+            //leftHeartEntity.Transform.SetScale(0.2f);
 
             //var rightHeart = scene.Content.Load<Texture2D>("heartright");
             //rightHeartEntity = CreateEntity("rightHeart");
             //rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
             //rightHeartEntity.Transform.Position = new Vector2(400, 400);
-            //rightHeartEntity.Transform.SetScale(0.5f);
+            //rightHeartEntity.Transform.SetScale(0.2f);
 
             //var heart = scene.Content.Load<Texture2D>("heart");
             //heartEntity = CreateEntity("heart");
             //heartEntity.AddComponent(new SpriteRenderer(heart));
             //heartEntity.Transform.Position = new Vector2(400, 400);
-            //heartEntity.Transform.SetScale(0.5f);
-
-            //var cavity1 = scene.Content.Load<Texture2D>("cavity");
-            //cavity1Entity = CreateEntity("cavity1");
-            //cavity1Entity.AddComponent(new SpriteRenderer(cavity1));
-            //cavity1Entity.Transform.Position = new Vector2(400, 400);
-            //cavity1Entity.Transform.SetScale(0.5f);
-
-            //var cavity2 = scene.Content.Load<Texture2D>("cavity2");
-            //cavity2Entity = CreateEntity("cavity2");
-            //cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
-            //cavity2Entity.Transform.Position = new Vector2(400, 400);
-            //cavity2Entity.Transform.SetScale(0.5f);
+            //heartEntity.Transform.SetScale(0.2f);
 
             var pupil2 = scene.Content.Load<Texture2D>("pupil2");
             pupil2Entity = CreateEntity("pupil2");
@@ -92,8 +96,10 @@ namespace Repair.Frames
             var surgeryLine = scene.Content.Load<Texture2D>("surgeryline");
             surgeryLineEntity = CreateEntity("surgeryline");
             surgeryLineEntity.AddComponent(new SpriteRenderer(surgeryLine));
-            surgeryLineEntity.Transform.Position = pupil2point;
+            surgeryLineEntity.Transform.Position = new Vector2(370, 860);
             surgeryLineEntity.Transform.SetScale(0.2f);
+
+
         }
 
         public override void Update()
@@ -104,15 +110,13 @@ namespace Repair.Frames
                 case SurgeryStage.MAN_PAN:
                     ManPan();
                     break;
-                case SurgeryStage.CUT:
-                    Cut();
-                    break;
             }
         }
 
         public void ManPan() {
             Vector2 translate = new Vector2(0,-2.0f);
             manEntity.Transform.SetPosition(manEntity.Transform.Position + translate);
+            surgeryLineEntity.Transform.SetPosition(surgeryLineEntity.Transform.Position + translate);
             ticks1++;
             ticks2--;
             Vector2 translate2 = new Vector2((float)Math.Sin(ticks1/2),(float) Math.Cos(ticks1/2));
@@ -124,12 +128,18 @@ namespace Repair.Frames
             pupil1Entity.Transform.SetPosition(pupil1point + translate2);
             pupil2Entity.Transform.SetPosition(pupil2point + translate3);
             if (manEntity.Transform.Position.Y < 400) { 
-            stage = SurgeryStage.CUT; 
+                stage = SurgeryStage.CUT;
+                base.SetUpDrawArea(0.15f, new Vector2(318, 82), new Vector2(413, 418));
             }
         }
 
-        public void Cut()
+        public override void AreaFilled()
         {
+            base.AreaFilled();
+            OnFinish();
+            //cavity1Entity.SetEnabled(true);
+            //cavity2Entity.SetEnabled(true);
+            //surgeryLineEntity.SetEnabled(false);
 
         }
 

@@ -9,9 +9,9 @@ namespace Repair.Framework
 {
     public class DrawFrame : Frame
     {
-        List<Vector2> nodes;
+        List<Vector2> nodes = new List<Vector2>();
         Vector2 MinBox, MaxBox;
-        static float nodeSize = 5.0f;
+        static float nodeSize = 10.0f;
         int MaxNumber;
         float percentageToComplete;
         bool drawActive = false;

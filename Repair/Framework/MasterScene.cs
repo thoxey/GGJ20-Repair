@@ -1,5 +1,6 @@
 ﻿using System;
 using Nez;
+using Repair.Framework;
 
 namespace Framework
 {
@@ -13,6 +14,8 @@ namespace Framework
         {
             base.OnStart();
             AddSceneComponent(new FrameManager());
+            Entity FollowMouse = CreateEntity("mouse");
+            FollowMouse.AddComponent<FollowMouseComponent>();
         }
     }
 }
