@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Nez;
 using Nez.Sprites;
 
@@ -10,9 +11,12 @@ namespace Framework
         protected string titleAssetName;
         private Entity titleEntity;
 
-        public TitleFrame(string titleAsset)
+        private float scalar;
+
+        public TitleFrame(string titleAsset, float scaleAdjustment = 0.35f)
         {
             titleAssetName = titleAsset;
+            scalar = scaleAdjustment;
         }
 
         public override void Init()
@@ -26,7 +30,18 @@ namespace Framework
 
             var width = Core.GraphicsDevice.Viewport.Width;
             var height = Core.GraphicsDevice.Viewport.Height;
-            titleEntity.Transform.Position = new Vector2(width / 2, height / 2);
+            titleEntity.Transform.Position = new Vector2(width / 2, (height / 2) - 50);
+            titleEntity.Transform.Scale *= scalar;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            if (Input.IsKeyDown(Keys.Space))
+            {
+                Timeout -= OnTimeout;
+                OnFinish();
+            }
         }
     }
 }
