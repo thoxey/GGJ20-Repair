@@ -51,6 +51,7 @@
     <Compile Include="Framework\TimedFrame.cs" />
     <Compile Include="Framework\ObjectiveFrame.cs" />
     <Compile Include="Framework\TitleFrame.cs" />
+    <Compile Include="Frames\TurnItOnAndOffFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
