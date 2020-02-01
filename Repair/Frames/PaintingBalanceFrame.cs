@@ -35,7 +35,7 @@ namespace Repair.Frames
         {
             if (paintingScale < 3.0f)
             {
-                paintingScale += 0.01f;
+                paintingScale += 0.03f;
                 paintingEntity.Transform.Scale = new Vector2(paintingScale);
             }
             else if (paintingScale >= 3.0f)

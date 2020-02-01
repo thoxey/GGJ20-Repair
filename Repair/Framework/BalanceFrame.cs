@@ -15,6 +15,8 @@ namespace Framework
 
         Entity levelEntity, bubbleEntity;
 
+        protected float nudgeValue = 5.0f;
+
         protected float angle = 45f;
         protected float speed = 0f;
         protected bool isAligned = false;
@@ -59,7 +61,7 @@ namespace Framework
             UpdateSprites();
 
             //Check if aligned
-            if (Math.Abs(angle) < 1 && speed.Equals(0.0f))
+            if (Math.Abs(angle) < safeAngle && speed.Equals(0.0f))
                 isAligned = true;
         }
 
@@ -109,19 +111,19 @@ namespace Framework
         {
             if (Input.IsKeyPressed(Keys.Left))
             {
-                speed -= 3.0f;
+                speed -= nudgeValue;
             }
             if (Input.IsKeyPressed(Keys.Right))
             {
-                speed += 3.0f;
+                speed += nudgeValue;
             }
             if (Input.IsKeyPressed(Keys.A))
             {
-                speed -= 1.5f;
+                speed -= nudgeValue/2;
             }
             if (Input.IsKeyPressed(Keys.D))
             {
-                speed += 1.5f;
+                speed += nudgeValue/2;
             }
         }
 
