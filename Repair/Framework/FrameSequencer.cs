@@ -30,10 +30,10 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
-            frames.Enqueue(new TitleFrame("Pizza Wizard"));
-            frames.Enqueue(new BalanceFrame());
-            frames.Enqueue(new TurnItOnAndOffFrame());
-            frames.Enqueue(new TitleFrame("Pizza Wizard"));
+            //frames.Enqueue(new TitleFrame("Pizza Wizard"));
+            frames.Enqueue(new PaintingBalanceFrame());
+            //frames.Enqueue(new TurnItOnAndOffFrame());
+            //frames.Enqueue(new TitleFrame("Pizza Wizard"));
         }
     }
 }

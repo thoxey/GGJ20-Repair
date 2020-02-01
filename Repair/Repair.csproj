@@ -53,7 +53,8 @@
     <Compile Include="Frames\TurnItOnAndOffFrame.cs" />
     <Compile Include="Framework\FrameSequencer.cs" />
     <Compile Include="Framework\PumpFrame.cs" />
-    <Compile Include="Frames\BalanceFrame.cs" />
+    <Compile Include="Frames\PaintingBalanceFrame.cs" />
+    <Compile Include="Framework\BalanceFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
