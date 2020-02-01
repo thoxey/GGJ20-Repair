@@ -15,7 +15,7 @@ namespace Framework
         {
             base.OnEnabled();
 
-            frames.Add(new TurnItOnAndOffFrame());
+            frames.Add(new BalanceFrame());
         }
 
         public override void Update()
