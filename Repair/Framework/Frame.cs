@@ -4,25 +4,25 @@ using Nez;
 
 namespace Framework
 {
-    public class Frame
+    public abstract class Frame
     {
-
-        public Frame()
+        protected Frame()
         {
+
         }
 
-        public void Update()
+        public virtual void Update()
         {
         
         }
 
 
-        public void Draw()
+        public virtual void Draw()
         {
 
         }
 
-        public void Finish()
+        public virtual void Finish()
         {
 
         }

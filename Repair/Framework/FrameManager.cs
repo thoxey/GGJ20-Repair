@@ -16,13 +16,12 @@ namespace Framework
             if (Input.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
                 PrepareNextFrame();
             else
-                CurrentFrame.Update();
+                CurrentFrame?.Update();
         }
 
         public void PrepareNextFrame()
         {
             CurrentFrame.Finish();
-            CurrentFrame = new Frame();
         }
     }
 }
