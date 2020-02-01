@@ -8,6 +8,10 @@ namespace Framework
         public override void Initialize()
         {
             base.Initialize();
+        }
+        public override void OnStart()
+        {
+            base.OnStart();
             AddSceneComponent(new FrameManager());
         }
     }

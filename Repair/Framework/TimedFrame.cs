@@ -11,8 +11,9 @@ namespace Framework
 
         protected TimedFrame() : base()
         {
-            Core.Schedule(frameTime, false, this, Timeout);
+
             Timeout += OnTimeout;
+            Core.Schedule(frameTime, false, Timeout);
         }
 
         protected abstract void OnTimeout(ITimer timer);

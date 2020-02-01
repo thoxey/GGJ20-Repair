@@ -10,8 +10,6 @@ namespace Framework
     /// </summary>
     public class MainGame : Core
     {
-        public FrameManager frameManager = new FrameManager();
-
         public MainGame() : base() {}
 
 
