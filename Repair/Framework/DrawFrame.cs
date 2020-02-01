@@ -16,6 +16,9 @@ namespace Repair.Framework
         float percentageToComplete;
         bool drawActive = false;
 
+        protected bool IsInZone => Input.MousePosition.X > MinBox.X && Input.MousePosition.X < MaxBox.X &&
+                                   Input.MousePosition.Y > MinBox.Y && Input.MousePosition.Y < MaxBox.Y;
+
         protected void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
         {
             MinBox = minBox;
@@ -30,7 +33,15 @@ namespace Repair.Framework
 
         public override void Update()
         {
-            if (drawActive && Input.LeftMouseButtonDown)
+            if (drawActive)
+            {
+                CheckForInput();
+            }
+        }
+
+        private void CheckForInput()
+        {
+            if (Input.LeftMouseButtonDown && IsInZone)
             {
                 bool overlapped = false;
                 foreach (Vector2 node in nodes)

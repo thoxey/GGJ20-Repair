@@ -13,7 +13,11 @@ namespace Frames
         public override void Init()
         {
             base.Init();
+            SetupDoor();
+        }
 
+        private void SetupDoor()
+        {
             var doorTexture = Core.Scene.Content.Load<Texture2D>("door");
             var door = CreateEntity("door");
             door.AddComponent(new SpriteRenderer(doorTexture));
@@ -25,11 +29,18 @@ namespace Frames
             SetUpDrawArea(.8f, new Vector2(185, 395), new Vector2(840, 435));
         }
 
-        public override void AreaFilled()
+        public override void Update()
+        {
+            base.Update();
+
+        }
+
+        protected override void AreaFilled()
         {
             base.AreaFilled();
             OnFinish();
         }
+
 
         public override void OnNodeAdded(Vector2 NodePos)
         {

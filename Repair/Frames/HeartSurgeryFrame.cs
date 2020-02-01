@@ -133,7 +133,7 @@ namespace Frames
             }
         }
 
-        public override void AreaFilled()
+        protected override void AreaFilled()
         {
             base.AreaFilled();
             OnFinish();
