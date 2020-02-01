@@ -49,9 +49,9 @@
     <Compile Include="Framework\Frame.cs" />
     <Compile Include="Framework\MasterScene.cs" />
     <Compile Include="Framework\TimedFrame.cs" />
-    <Compile Include="Framework\ObjectiveFrame.cs" />
     <Compile Include="Framework\TitleFrame.cs" />
     <Compile Include="Frames\TurnItOnAndOffFrame.cs" />
+    <Compile Include="Framework\FrameSequencer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

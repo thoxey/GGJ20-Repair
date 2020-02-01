@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Nez;
 
@@ -6,11 +7,21 @@ namespace Framework
 {
     public abstract class Frame
     {
-        private bool isFinished = false;
+        public Action Finish;
 
-        protected Frame()
+        protected List<Entity> props;
+
+
+        protected Entity CreateEntity(string name)
         {
+            var ret = Core.Scene.CreateEntity(name);
+            props.Add(ret);
+            return ret;
+        }
 
+        public virtual void Init()
+        {
+            props = new List<Entity>();
         }
 
         public virtual void Update()
@@ -24,14 +35,13 @@ namespace Framework
 
         }
 
-        public virtual void Finish()
+        public virtual void OnFinish()
         {
-            isFinished = true;
-        }
-
-        public bool IsFinished()
-        {
-            return isFinished;
+            foreach(var entity in props)
+            {
+                entity.Destroy();
+            }
+            Finish?.Invoke();
         }
     }
 }
