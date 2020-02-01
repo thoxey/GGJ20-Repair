@@ -16,7 +16,7 @@ namespace Repair.Framework
         float percentageToComplete;
         bool drawActive = false;
 
-        public void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
+        protected void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
         {
             MinBox = minBox;
             MaxBox = maxBox;
@@ -54,7 +54,7 @@ namespace Repair.Framework
             }
         }
 
-        public virtual void AreaFilled()
+        protected virtual void AreaFilled()
         {
             drawActive = false;
         }

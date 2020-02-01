@@ -61,6 +61,7 @@
     <Compile Include="Frames\ScoreFrame.cs" />
     <Compile Include="Framework\FollowMouseComponent.cs" />
     <Compile Include="Frames\RepairHeartFrame.cs" />
+    <Compile Include="Frames\PlaneDoor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -129,7 +129,7 @@ namespace Frames
             pupil2Entity.Transform.SetPosition(pupil2point + translate3);
             if (manEntity.Transform.Position.Y < 400) { 
                 stage = SurgeryStage.CUT;
-                base.SetUpDrawArea(0.4f, new Vector2(318, 82), new Vector2(413, 418));
+                SetUpDrawArea(0.4f, new Vector2(318, 82), new Vector2(413, 418));
             }
         }
 

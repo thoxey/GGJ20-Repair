@@ -30,8 +30,8 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
-            frames.Enqueue(new HeartSurgeryFrame());
-            return;
+            frames.Enqueue(new PlaneDoor());
+
             frames.Enqueue(new TitleFrame("title_repair"));
             frames.Enqueue(new TitleFrame("title_job_handiman"));
             frames.Enqueue(new TitleFrame("title_hangpainting"));
@@ -50,6 +50,7 @@ namespace Framework
             frames.Enqueue(new TurnItOnAndOffFrame());
             frames.Enqueue(new TitleFrame("title_job_doctor"));
             frames.Enqueue(new TitleFrame("title_heart"));
+            frames.Enqueue(new HeartSurgeryFrame());
             frames.Enqueue(new TitleFrame("title_retire"));
             frames.Enqueue(new TitleFrame("title_died"));
         }
