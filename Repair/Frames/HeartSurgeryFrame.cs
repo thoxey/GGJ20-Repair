@@ -25,57 +25,75 @@ namespace Repair.Frames
 
         SurgeryStage stage = SurgeryStage.MAN_PAN;
 
-        Entity manEntity, leftHeartEntity, rightHeartEntity, heartEntity, cavity1Entity, cavity2Entity, pupil1Entity, pupil2Entity;
+        Entity manEntity, surgeryLineEntity, leftHeartEntity, rightHeartEntity, heartEntity, cavity1Entity, cavity2Entity, pupil1Entity, pupil2Entity;
+        int ticks1 = 0;
+        int ticks2 = 23;
+        Vector2 pupil2point = new Vector2(510, 300);
+        Vector2 pupil1point = new Vector2(320, 300);
+        float pupilModifier = 8.0f;
+
         public HeartSurgeryFrame()
         {
+
+        }
+
+        public override void Init()
+        {
+            base.Init();
             var scene = Core.Scene;
             var man = scene.Content.Load<Texture2D>("man");
-            manEntity = CreateEntity("man");
+            manEntity = CreateEntity("manforsurgery");
             manEntity.AddComponent(new SpriteRenderer(man));
-            manEntity.Transform.Position = new Vector2(400, -200);
+            manEntity.Transform.Position = new Vector2(400, 1000);
             manEntity.Transform.SetScale(0.5f);
 
-            var leftHeart = scene.Content.Load<Texture2D>("leftHeart");
-            leftHeartEntity = CreateEntity("leftHeart");
-            leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
-            leftHeartEntity.Transform.Position = new Vector2(400, 400);
-            leftHeartEntity.Transform.SetScale(0.5f);
+            //var leftHeart = scene.Content.Load<Texture2D>("leftheart");
+            //leftHeartEntity = CreateEntity("leftHeart");
+            //leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
+            //leftHeartEntity.Transform.Position = new Vector2(400, 400);
+            //leftHeartEntity.Transform.SetScale(0.5f);
 
-            var rightHeart = scene.Content.Load<Texture2D>("rightHeart");
-            rightHeartEntity = CreateEntity("rightHeart");
-            rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
-            rightHeartEntity.Transform.Position = new Vector2(400, 400);
-            rightHeartEntity.Transform.SetScale(0.5f);
+            //var rightHeart = scene.Content.Load<Texture2D>("heartright");
+            //rightHeartEntity = CreateEntity("rightHeart");
+            //rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
+            //rightHeartEntity.Transform.Position = new Vector2(400, 400);
+            //rightHeartEntity.Transform.SetScale(0.5f);
 
-            var heart = scene.Content.Load<Texture2D>("heart");
-            heartEntity = CreateEntity("heart");
-            heartEntity.AddComponent(new SpriteRenderer(heart));
-            heartEntity.Transform.Position = new Vector2(400, 400);
-            heartEntity.Transform.SetScale(0.5f);
+            //var heart = scene.Content.Load<Texture2D>("heart");
+            //heartEntity = CreateEntity("heart");
+            //heartEntity.AddComponent(new SpriteRenderer(heart));
+            //heartEntity.Transform.Position = new Vector2(400, 400);
+            //heartEntity.Transform.SetScale(0.5f);
 
-            var cavity1 = scene.Content.Load<Texture2D>("cavity");
-            cavity1Entity = CreateEntity("cavity1");
-            cavity1Entity.AddComponent(new SpriteRenderer(cavity1));
-            cavity1Entity.Transform.Position = new Vector2(400, 400);
-            cavity1Entity.Transform.SetScale(0.5f);
+            //var cavity1 = scene.Content.Load<Texture2D>("cavity");
+            //cavity1Entity = CreateEntity("cavity1");
+            //cavity1Entity.AddComponent(new SpriteRenderer(cavity1));
+            //cavity1Entity.Transform.Position = new Vector2(400, 400);
+            //cavity1Entity.Transform.SetScale(0.5f);
 
-            var cavity2 = scene.Content.Load<Texture2D>("cavity2");
-            cavity2Entity = CreateEntity("cavity2");
-            cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
-            cavity2Entity.Transform.Position = new Vector2(400, 400);
-            cavity2Entity.Transform.SetScale(0.5f);
+            //var cavity2 = scene.Content.Load<Texture2D>("cavity2");
+            //cavity2Entity = CreateEntity("cavity2");
+            //cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
+            //cavity2Entity.Transform.Position = new Vector2(400, 400);
+            //cavity2Entity.Transform.SetScale(0.5f);
 
             var pupil2 = scene.Content.Load<Texture2D>("pupil2");
             pupil2Entity = CreateEntity("pupil2");
             pupil2Entity.AddComponent(new SpriteRenderer(pupil2));
-            pupil2Entity.Transform.Position = new Vector2(400, 400);
-            pupil2Entity.Transform.SetScale(0.5f);
+            pupil2Entity.Transform.Position = pupil2point;
+            pupil2Entity.Transform.SetScale(0.2f);
 
             var pupil1 = scene.Content.Load<Texture2D>("pupil1");
             pupil1Entity = CreateEntity("pupil1");
             pupil1Entity.AddComponent(new SpriteRenderer(pupil1));
-            pupil1Entity.Transform.Position = new Vector2(400, 400);
-            pupil1Entity.Transform.SetScale(0.5f);
+            pupil1Entity.Transform.Position = pupil1point;
+            pupil1Entity.Transform.SetScale(0.2f);
+
+            var surgeryLine = scene.Content.Load<Texture2D>("surgeryline");
+            surgeryLineEntity = CreateEntity("surgeryline");
+            surgeryLineEntity.AddComponent(new SpriteRenderer(surgeryLine));
+            surgeryLineEntity.Transform.Position = pupil2point;
+            surgeryLineEntity.Transform.SetScale(0.2f);
         }
 
         public override void Update()
@@ -86,10 +104,34 @@ namespace Repair.Frames
                 case SurgeryStage.MAN_PAN:
                     ManPan();
                     break;
+                case SurgeryStage.CUT:
+                    Cut();
+                    break;
             }
         }
 
-        public void ManPan() { }
+        public void ManPan() {
+            Vector2 translate = new Vector2(0,-2.0f);
+            manEntity.Transform.SetPosition(manEntity.Transform.Position + translate);
+            ticks1++;
+            ticks2--;
+            Vector2 translate2 = new Vector2((float)Math.Sin(ticks1/2),(float) Math.Cos(ticks1/2));
+            Vector2 translate3 = new Vector2((float)Math.Sin(ticks2/2), (float)Math.Cos(ticks2/2));
+            translate2 *= pupilModifier;
+            translate3 *= pupilModifier;
+            pupil1point += translate;
+            pupil2point += translate;
+            pupil1Entity.Transform.SetPosition(pupil1point + translate2);
+            pupil2Entity.Transform.SetPosition(pupil2point + translate3);
+            if (manEntity.Transform.Position.Y < 400) { 
+            stage = SurgeryStage.CUT; 
+            }
+        }
+
+        public void Cut()
+        {
+
+        }
 
     }
 }

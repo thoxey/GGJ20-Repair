@@ -14,7 +14,7 @@ namespace Repair.Framework
         static float nodeSize = 5.0f;
         int MaxNumber;
         float percentageToComplete;
-        bool drawReady = false;
+        bool drawActive = false;
 
         public DrawFrame()
         {
@@ -34,7 +34,7 @@ namespace Repair.Framework
 
         public override void Update()
         {
-            if (drawReady && Input.LeftMouseButtonDown)
+            if (drawActive && Input.LeftMouseButtonDown)
             {
                 bool overlapped = false;
                 foreach (Vector2 node in nodes)
@@ -59,7 +59,7 @@ namespace Repair.Framework
 
         public virtual void AreaFilled()
         {
-            drawReady = false;
+            drawActive = false;
         }
     }
 }
