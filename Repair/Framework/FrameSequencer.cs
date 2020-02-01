@@ -1,4 +1,4 @@
-﻿using Repair.Frames;
+﻿using Frames;
 using System.Collections.Generic;
 
 namespace Framework
@@ -31,7 +31,8 @@ namespace Framework
         private void LoadFrameSequence()
         {
             //frames.Enqueue(new TitleFrame("Pizza Wizard"));
-            frames.Enqueue(new PaintingBalanceFrame());
+            //frames.Enqueue(new PaintingBalanceFrame());
+            frames.Enqueue(new WheelAlignmentFrame());
             //frames.Enqueue(new TurnItOnAndOffFrame());
             //frames.Enqueue(new TitleFrame("Pizza Wizard"));
         }

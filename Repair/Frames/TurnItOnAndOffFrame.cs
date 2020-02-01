@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
 
-namespace Repair.Frames
+namespace Frames
 {
     public class TurnItOnAndOffFrame : Frame
     {
