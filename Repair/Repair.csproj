@@ -55,6 +55,8 @@
     <Compile Include="Framework\PumpFrame.cs" />
     <Compile Include="Frames\PaintingBalanceFrame.cs" />
     <Compile Include="Framework\BalanceFrame.cs" />
+    <Compile Include="Framework\DrawFrame.cs" />
+    <Compile Include="Frames\HeartSurgeryFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
