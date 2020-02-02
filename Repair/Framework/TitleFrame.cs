@@ -33,15 +33,5 @@ namespace Framework
             titleEntity.Transform.Position = new Vector2(width / 2, (height / 2) - 50);
             titleEntity.Transform.Scale *= scalar;
         }
-
-        public override void Update()
-        {
-            base.Update();
-            //if (Input.IsKeyDown(Keys.Space))
-            //{
-            //    Timeout -= OnTimeout;
-            //    OnFinish();
-            //}
-        }
     }
 }

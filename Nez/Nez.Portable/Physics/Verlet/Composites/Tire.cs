@@ -23,8 +23,7 @@ namespace Nez.Verlet
 			for (var i = 0; i < segments; i++)
 			{
 				AddConstraint(new DistanceConstraint(Particles[i], Particles[(i + 1) % segments], treadStiffness));
-				AddConstraint(new DistanceConstraint(Particles[i], centerParticle, spokeStiffness))
-					.SetCollidesWithColliders(false);
+				AddConstraint(new DistanceConstraint(Particles[i], centerParticle, spokeStiffness)).SetCollidesWithColliders(false);
 				AddConstraint(new DistanceConstraint(Particles[i], Particles[(i + 5) % segments], treadStiffness));
 			}
 		}

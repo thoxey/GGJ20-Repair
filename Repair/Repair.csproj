@@ -69,6 +69,8 @@
     <Compile Include="Frames\PumpTyreFrame.cs" />
     <Compile Include="Frames\PlungeToiletFrame.cs" />
     <Compile Include="Frames\DustComputerFrame.cs" />
+    <Compile Include="Framework\VerletDemo.cs" />
+    <Compile Include="Framework\ParticleSpriteSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -31,7 +31,11 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
+
+            frames.Enqueue(new PaintingBalanceFrame());
+
             frames.Enqueue(new TitleFrame("title_repair"));
+
             frames.Enqueue(new TitleFrame("title_job_handiman"));
             frames.Enqueue(new TitleFrame("title_hangpainting"));
             frames.Enqueue(new PaintingBalanceFrame());
@@ -46,6 +50,7 @@ namespace Framework
             frames.Enqueue(new WheelAlignmentFrame());
             frames.Enqueue(new TitleFrame("title_replacelights"));
             frames.Enqueue(new ReplaceLightsFrame());
+
             frames.Enqueue(new TitleFrame("job_it"));
             frames.Enqueue(new TitleFrame("title_replaceparts"));
             frames.Enqueue(new ReplacePartFrame());
@@ -53,6 +58,7 @@ namespace Framework
             frames.Enqueue(new DustComputerFrame());
             frames.Enqueue(new TitleFrame("title_restart"));
             frames.Enqueue(new TurnItOnAndOffFrame());
+
             frames.Enqueue(new TitleFrame("title_job_doctor"));
             frames.Enqueue(new TitleFrame("title_heart"));
             frames.Enqueue(new HeartSurgeryFrame());

@@ -40,7 +40,7 @@ namespace Framework
         {
             foreach(var entity in props)
             {
-                entity?.Destroy();
+                entity.Destroy();
             }
             Finish?.Invoke();
         }
