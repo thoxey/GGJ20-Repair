@@ -21,7 +21,7 @@ namespace Framework
         protected float mPressureProportion = 0.0f;
         protected float mMaxPressure = 3.0f;
 
-        private bool mReleasing = false;
+        protected bool mReleasing = false;
 
         protected bool mGauge = false;
 
@@ -81,7 +81,7 @@ namespace Framework
             }
             if(mReleasing)
             {
-                float pumpAmount = 0.001f * 30.0f * mPumpPotentialSpeed;
+                float pumpAmount = 0.001f * 3.0f * mPumpPotentialSpeed;
                 mPumpPotential -= pumpAmount;
                 mPressure += pumpAmount;
 

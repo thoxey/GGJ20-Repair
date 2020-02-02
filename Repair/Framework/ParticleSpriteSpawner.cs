@@ -18,15 +18,29 @@ namespace Framework
 
         private VerletWorld world;
 
-        private string spriteName;
+        private List<string> spriteNames;
+
+        private float spriteDepth;
+
+        private int numberOfSpritesSpawned = 0;
+
+        private float degreesRotateSprite, scaleSprites;
+
+        private Vector2 startVelocity, jitter;
 
         List<(Entity, Composite, long)> particles = new List<(Entity, Composite, long)>();
 
-        public void InitParticleSystem(Func<bool> shouldSpawnGetter, string spriteName, float speedMultiplier)
+        public void InitParticleSystem(Func<bool> shouldSpawnGetter, List<string> spriteNames, float speedMultiplier, Vector2 startVelocity, Vector2 jitter, float scaleSprites = 1.0f, float degreesRotateSprite = 0.0f, float depth = 0.0f)
         {
             shouldSpawn = shouldSpawnGetter;
-            this.spriteName = spriteName;
+            this.spriteNames = spriteNames;
             this.speedMultiplier = speedMultiplier;
+            this.degreesRotateSprite = degreesRotateSprite;
+            this.jitter = jitter;
+            this.startVelocity = startVelocity;
+            this.scaleSprites = scaleSprites;
+
+            spriteDepth = depth;
 
             world = new VerletWorld(new Rectangle(0, 0, Core.GraphicsDevice.Viewport.Width, Core.GraphicsDevice.Viewport.Height));
             world.Gravity = new Vector2(0, 2000);
@@ -34,13 +48,14 @@ namespace Framework
 
         private Entity CreateSpriteEntity()
         {
-            var particleSprite = Core.Scene.Content.Load<Texture2D>(spriteName);
+            numberOfSpritesSpawned++;
+            var particleSprite = Core.Scene.Content.Load<Texture2D>(spriteNames[numberOfSpritesSpawned % spriteNames.Count]);
             var particleEntity = Core.Scene.CreateEntity("particle" + Guid.NewGuid().ToString().Substring(0, 3));
             var sprite = new SpriteRenderer(particleSprite);
-            sprite.SetLayerDepth(0);
+            sprite.SetLayerDepth(spriteDepth);
             particleEntity.AddComponent(sprite);
             particleEntity.Transform.Position = new Vector2(0, 0);
-            particleEntity.Transform.SetScale(0.2f);
+            particleEntity.Transform.SetScale(scaleSprites);
             return particleEntity;
         }
 
@@ -57,12 +72,12 @@ namespace Framework
             if (shouldSpawn())
             {
                 var composite = new Composite();
-                var particle = new Particle(Input.MousePosition);
+                var particle = new Particle(Entity.Transform.Position);
                 particle.Mass = 100f;
                 composite.AddParticle(particle);
-                particle.ApplyForce(RandomUpwardsForce());
+                particle.ApplyForce(JitteredForce());
                 world.AddComposite(composite);
-                var timeOut = DateTime.Now.AddSeconds(1).Ticks;
+                var timeOut = DateTime.Now.AddSeconds(5).Ticks;
 
                 var particleSprite = CreateSpriteEntity();
                 particles.Add((particleSprite, composite, timeOut));
@@ -76,16 +91,34 @@ namespace Framework
             var particlesToClear = new List<(Entity, Composite, long)>();
             foreach (var particle in particles)
             {
-                if(DateTime.Now.Ticks > particle.Item3)
+                if(DateTime.Now.Ticks > particle.Item3 || particle.Item1.Transform.Position.Y > 700)
                 {
                     particle.Item1.Destroy();
                     world.RemoveComposite(particle.Item2);
                     particlesToClear.Add(particle);
-                    
+
                 }
                 else
                 {
                     particle.Item1.Transform.Position = particle.Item2.Particles[0].Position;
+                    Vector2 velocity = particle.Item2.Particles[0].Position - particle.Item2.Particles[0].LastPosition;
+
+
+                    double theta1 = Math.Atan2(- 1,0) * (180 / Math.PI);
+
+                    double theta2 = Math.Atan2(0 - velocity.Y, 0 - velocity.X) * (180 / Math.PI);
+
+                    double diff = Math.Abs(theta1 - theta2);
+                    double angle = Math.Min(diff, Math.Abs(180 - diff));
+
+                    velocity.Normalize();
+                    Vector2 tmp = new Vector2(0, -1);
+                    float dot = velocity.X* tmp.X+ velocity.Y * tmp.Y;
+
+                    float angleToAdd = (float)Math.Acos(dot) * (float)(180 / Math.PI);
+                    if (velocity.X < 0) angleToAdd *= -1;
+
+                    particle.Item1.Transform.SetRotationDegrees(degreesRotateSprite + angleToAdd);
                 }
             }
             foreach(var particleToRemove in particlesToClear)
@@ -94,15 +127,14 @@ namespace Framework
             }
         }
 
+
+
         private static System.Random rng = new System.Random();
 
-        private Vector2 RandomUpwardsForce()
+        private Vector2 JitteredForce()
         {
-            float seed = (float)rng.NextDouble() + 1.0f;
-            float signSeed = (float)rng.NextDouble();
-            var sign = signSeed > 0.5f ? -1f : 1f;
-
-            return new Vector2(seed * speedMultiplier * sign, seed * speedMultiplier * -1);
+            return new Vector2(startVelocity.X + (float)rng.NextDouble() * 2 * jitter.X - jitter.X,
+                startVelocity.Y + (float)rng.NextDouble() * 2 * jitter.Y - jitter.Y);
         }
     }
 }
