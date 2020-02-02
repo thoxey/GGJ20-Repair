@@ -21,12 +21,12 @@ namespace Frames
 
         private void SetupDoor()
         {
-            var doorTexture = Core.Scene.Content.Load<Texture2D>("door");
+            var doorTexture = Core.Scene.Content.Load<Texture2D>("newdoor");
             door = CreateEntity("door");
             door.AddComponent(new SpriteRenderer(doorTexture));
             var width = Core.GraphicsDevice.Viewport.Width;
             var height = Core.GraphicsDevice.Viewport.Height;
-            door.Transform.Position = new Vector2(width * 0.4f, height);
+            door.Transform.Position = new Vector2(width * 0.4f, height - 180);
             door.Transform.SetScale(0.3f);
 
             SetUpDrawArea(.65f, new Vector2(185, 295), new Vector2(840, 335));

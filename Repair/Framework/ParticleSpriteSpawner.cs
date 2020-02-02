@@ -59,7 +59,24 @@ namespace Framework
             return particleEntity;
         }
 
-        public void Update()
+        public override void OnRemovedFromEntity()
+        {
+            base.OnRemovedFromEntity();
+            var particlesToClear = new List<(Entity, Composite, long)>();
+            foreach (var particle in particles)
+            {
+                particle.Item1.Destroy();
+                world.RemoveComposite(particle.Item2);
+                particlesToClear.Add(particle);
+
+            }
+            foreach (var particleToRemove in particlesToClear)
+            {
+                particles.Remove(particleToRemove);
+            }
+        }
+
+            public void Update()
         {
             if (IsInited)
                 return;
@@ -98,6 +115,7 @@ namespace Framework
                     particlesToClear.Add(particle);
 
                 }
+
                 else
                 {
                     particle.Item1.Transform.Position = particle.Item2.Particles[0].Position;
@@ -126,6 +144,7 @@ namespace Framework
                 particles.Remove(particleToRemove);
             }
         }
+
 
 
 
