@@ -12,6 +12,7 @@ namespace Repair.Frames
     public class ReplacePartFrame : Frame
     {
 
+        public override string HintSpriteName => "controls_clickdrag";
 
         Entity computerEntity, brokenPartEntity, newPartEntity, handEntity, computerLidEntity;
 

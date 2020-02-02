@@ -9,6 +9,8 @@ namespace Framework
 {
     public abstract class BalanceFrame : Frame
     {
+        public override string HintSpriteName => "controls_arrow";
+
         public BalanceFrame()
         {
         }

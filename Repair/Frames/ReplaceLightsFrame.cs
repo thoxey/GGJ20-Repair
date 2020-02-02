@@ -11,7 +11,7 @@ namespace Repair.Frames
 {
     public class ReplaceLightsFrame : Frame
     {
-
+        public override string HintSpriteName => "controls_clickdrag";
 
         Entity carEntity, brokenLightEntity, newLightEntity, handEntity;
 

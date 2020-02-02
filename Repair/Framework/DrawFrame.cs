@@ -9,6 +9,8 @@ namespace Repair.Framework
 {
     public abstract class DrawFrame : Frame
     {
+        public override string HintSpriteName => "controls_clickdrag";
+
         List<Vector2> nodes = new List<Vector2>();
         Vector2 MinBox, MaxBox;
         readonly float nodeSize = 15.0f;
@@ -33,6 +35,7 @@ namespace Repair.Framework
 
         public override void Update()
         {
+            base.Update();
             if (drawActive)
             {
                 CheckForInput();
