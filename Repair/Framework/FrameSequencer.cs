@@ -39,6 +39,7 @@ namespace Framework
             frames.Enqueue(new TitleFrame("title_plunge"));
             frames.Enqueue(new TitleFrame("title_job_mechanic"));
             frames.Enqueue(new TitleFrame("title_pumptyres"));
+            frames.Enqueue(new PumpTyreFrame());
             frames.Enqueue(new TitleFrame("title_alignwheels"));
             frames.Enqueue(new WheelAlignmentFrame());
             frames.Enqueue(new TitleFrame("title_replacelights"));

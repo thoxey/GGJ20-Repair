@@ -37,11 +37,11 @@ namespace Framework
         public override void Update()
         {
             base.Update();
-            if (Input.IsKeyDown(Keys.Space))
-            {
-                Timeout -= OnTimeout;
-                OnFinish();
-            }
+            //if (Input.IsKeyDown(Keys.Space))
+            //{
+            //    Timeout -= OnTimeout;
+            //    OnFinish();
+            //}
         }
     }
 }

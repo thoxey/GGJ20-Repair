@@ -13,8 +13,6 @@ namespace Framework
 
         protected List<Entity> props;
 
-        private static int backgroundCount = 0;
-
         protected Entity CreateEntity(string name)
         {
             var ret = Core.Scene.CreateEntity(name);
@@ -25,13 +23,11 @@ namespace Framework
         public virtual void Init()
         {
             props = new List<Entity>();
-
             var background = Core.Scene.Content.Load<Texture2D>("background");
-            var backgroundEntity = CreateEntity("background" + backgroundCount);
+            var backgroundEntity = CreateEntity("background");
             backgroundEntity.AddComponent(new SpriteRenderer(background));
             backgroundEntity.Transform.Position = new Vector2(650, 400);
             backgroundEntity.Transform.SetScale(0.4f);
-            backgroundCount++;
         }
 
         public virtual void Update()

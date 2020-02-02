@@ -66,6 +66,7 @@
     <Compile Include="Frames\PlaneDoor.cs" />
     <Compile Include="Frames\ReplaceLightsFrame.cs" />
     <Compile Include="Frames\ReplacePartFrame.cs" />
+    <Compile Include="Frames\PumpTyreFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
