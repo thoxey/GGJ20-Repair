@@ -70,6 +70,11 @@ namespace Repair.Framework
             drawActive = false;
         }
 
+        protected bool IsDrawActive()
+        {
+            return drawActive;
+        }
+
         public abstract void OnNodeAdded(Vector2 NodePos);
     }
 }

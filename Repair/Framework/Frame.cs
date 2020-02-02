@@ -28,6 +28,7 @@ namespace Framework
             backgroundEntity.AddComponent(new SpriteRenderer(background));
             backgroundEntity.Transform.Position = new Vector2(650, 400);
             backgroundEntity.Transform.SetScale(0.4f);
+            backgroundEntity.GetComponent<SpriteRenderer>().SetLayerDepth(0.99f);
         }
 
         public virtual void Update()

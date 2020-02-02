@@ -29,7 +29,14 @@ namespace Frames
             door.Transform.Position = new Vector2(width * 0.4f, height);
             door.Transform.SetScale(0.3f);
 
-            SetUpDrawArea(.8f, new Vector2(185, 395), new Vector2(840, 435));
+            var planer = Core.Scene.Content.Load<Texture2D>("planer");
+            var planerEntity = CreateEntity("planer");
+            planerEntity.AddComponent(new SpriteRenderer(planer));
+            planerEntity.Transform.Position = new Vector2(400, 400);
+            planerEntity.Transform.SetScale(0.15f);
+            planerEntity.AddComponent(new FollowMouseComponent());
+
+            SetUpDrawArea(.65f, new Vector2(185, 295), new Vector2(840, 335));
         }
 
         private void SetupPlaner()

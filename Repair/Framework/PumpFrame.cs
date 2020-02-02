@@ -66,6 +66,8 @@ namespace Framework
                 handEntity.AddComponent(new GrabberComponent());
                 pointerEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
                 gaugeEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
+
+                mPumpPotentialSpeed = mPumpPotentialStartSpeed;
             }
 
         }
@@ -79,7 +81,7 @@ namespace Framework
             }
             if(mReleasing)
             {
-                float pumpAmount = 0.001f * 9.0f * mPumpPotentialSpeed;
+                float pumpAmount = 0.001f * 30.0f * mPumpPotentialSpeed;
                 mPumpPotential -= pumpAmount;
                 mPressure += pumpAmount;
 
@@ -96,7 +98,11 @@ namespace Framework
                 mPumpPotential = Math.Min(mPumpPotential, 1.0f);
             }
             mPressureProportion = (float)Math.Min(mMaxPressure, mPressure) / mMaxPressure;
-            pointerPivotEntity.Transform.SetRotationDegrees(-90 + 180 * mPressureProportion);
+            if(mGauge)
+            {
+                pointerPivotEntity.Transform.SetRotationDegrees(-90 + 180 * mPressureProportion);
+            }
+
 
             if(mPressureProportion.Equals(1.0f))
             {
