@@ -32,7 +32,7 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
-            frames.Enqueue(new TitleFrame("title_repair"));
+            frames.Enqueue(new MenuFrame());
             frames.Enqueue(new TitleFrame("title_job_handiman"));
             frames.Enqueue(new TitleFrame("title_hangpainting"));
             frames.Enqueue(new PaintingBalanceFrame());

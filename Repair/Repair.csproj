@@ -71,6 +71,7 @@
     <Compile Include="Frames\DustComputerFrame.cs" />
     <Compile Include="Framework\VerletDemo.cs" />
     <Compile Include="Framework\ParticleSpriteSpawner.cs" />
+    <Compile Include="Frames\MenuFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
