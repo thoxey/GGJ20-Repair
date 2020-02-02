@@ -9,6 +9,8 @@ namespace Framework
 {
     public abstract class BalanceFrame : Frame
     {
+        public override string HintSpriteName => "controls_arrow";
+
         public BalanceFrame()
         {
         }
@@ -25,6 +27,8 @@ namespace Framework
         private readonly int maxAngle = 45;
         private readonly float safeZoneDampner = 0.1f;
 
+        private Vector2 levelPos;
+
         public override void Init()
         {
             base.Init();
@@ -33,17 +37,19 @@ namespace Framework
 
         protected virtual void InitSpiritLevelEnities()
         {
+            levelPos = new Vector2(1050, 600);
+
             var level = Core.Scene.Content.Load<Texture2D>("level");
             levelEntity = CreateEntity("level");
             levelEntity.AddComponent(new SpriteRenderer(level));
-            levelEntity.Transform.Position = new Vector2(1000, 400);
-            levelEntity.Transform.SetScale(0.15f);
+            levelEntity.Transform.Position = levelPos + new Vector2(20, 0);
+            levelEntity.Transform.SetScale(0.105f);
 
             var bubble = Core.Scene.Content.Load<Texture2D>("bubble");
             bubbleEntity = CreateEntity("bubble");
             bubbleEntity.AddComponent(new SpriteRenderer(bubble));
-            bubbleEntity.Transform.Position = new Vector2(985, 400);
-            bubbleEntity.Transform.SetScale(0.15f);
+            bubbleEntity.Transform.Position = levelPos + new Vector2(0, 500);
+            bubbleEntity.Transform.SetScale(0.08f);
         }
 
         public override void Update()
@@ -67,7 +73,7 @@ namespace Framework
 
         protected virtual void UpdateSprites()
         {
-            bubbleEntity.Transform.SetPosition(new Vector2(985 + angle * 1.5f, 400));
+            bubbleEntity.Transform.SetPosition(new Vector2(angle * 1.5f, 0) + levelPos);
         }
 
         protected void ResolveAngle()

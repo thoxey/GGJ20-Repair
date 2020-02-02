@@ -10,13 +10,15 @@ namespace Framework
 {
     public class PumpFrame : Frame
     {
+        public override string HintSpriteName => "controls_space";
+
         //private int 
         protected float mPressure = 0.0f;
         protected float mPumpPotential = 0.0f;
 
         protected float mPumpPotentialAcceleration = 50.0f;
-        protected float mPumpPotentialStartSpeed = 7.0f;
-        protected float mPumpPotentialSpeed = 7.0f;
+        protected float mPumpPotentialStartSpeed = 15.0f;
+        protected float mPumpPotentialSpeed = 15.0f;
         protected float mPumpPotentialLimit = 0.1f;
         protected float mPressureProportion = 0.0f;
         protected float mMaxPressure = 3.0f;

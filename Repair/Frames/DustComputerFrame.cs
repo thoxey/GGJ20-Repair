@@ -72,7 +72,7 @@ namespace Repair.Frames
             computerLidEntity.AddComponent(new SpriteRenderer(computerLid));
             computerLidEntity.Transform.Position = compPos;
             computerLidEntity.Transform.SetScale(0.3f);
-            computerLidEntity.Transform.TweenPositionTo(new Vector2(3000, 0), 4.0f).Start();
+            computerLidEntity.Transform.TweenPositionTo(new Vector2(3000, 0), 0.8f).Start();
             computerLidEntity.GetComponent<SpriteRenderer>().SetLayerDepth(0.5f);
 
             var sprayCan = Core.Scene.Content.Load<Texture2D>("sprayCan");
@@ -80,8 +80,8 @@ namespace Repair.Frames
             sprayCanEntity.AddComponent(new SpriteRenderer(sprayCan));
             sprayCanEntity.Transform.Position = new Vector2(400, 400);
             sprayCanEntity.Transform.SetScale(0.15f);
-            sprayCanEntity.AddComponent(new FollowMouseComponent());
             sprayCanEntity.GetComponent<SpriteRenderer>().SetLayerDepth(0.0f);
+            sprayCanEntity.Enabled = false;
 
             SetUpDrawArea(1.0f, minComp , maxComp);
         }
@@ -115,10 +115,19 @@ namespace Repair.Frames
                     everythingTweening = false;
                 }
             }
+
+            sprayCanEntity.Enabled = IsInZone;
+            sprayCanEntity.Position = Input.MousePosition + new Vector2(50, 50);
+
             if(everythingTweening)
             {
                 OnFinish();
             }
+        }
+
+        protected override void AreaFilled()
+        {
+            OnFinish();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Frames
     {
         Entity paintingEntity;
 
-        float paintingScale = 0.2f;
+        float paintingScale = 0.18f;
 
         protected override void InitSpiritLevelEnities()
         {
@@ -21,7 +21,7 @@ namespace Frames
             var squid = Core.Scene.Content.Load<Texture2D>("squid");
             paintingEntity = CreateEntity("painting");
             paintingEntity.AddComponent(new SpriteRenderer(squid));
-            paintingEntity.Transform.Position = new Vector2(400, 400);
+            paintingEntity.Transform.Position = new Vector2(500, 350);
             paintingEntity.Transform.SetScale(paintingScale);
         }
 
@@ -31,14 +31,23 @@ namespace Frames
             paintingEntity.Transform.SetRotationDegrees(angle);
         }
 
+        float timer = 0f;
+
         protected override void Finalise()
         {
-            if (paintingScale < 3.0f)
+            paintingEntity.Transform.SetRotationDegrees(0);
+            if (timer < 1.0f)
+            {
+                timer += 0.03f;
+                return;
+            }
+
+            if (paintingScale < 1.0f)
             {
                 paintingScale += 0.03f;
                 paintingEntity.Transform.Scale = new Vector2(paintingScale);
             }
-            else if (paintingScale >= 3.0f)
+            else if (paintingScale >= 1.0f)
             {
                 OnFinish();
             }

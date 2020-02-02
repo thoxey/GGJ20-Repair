@@ -11,7 +11,8 @@ namespace Repair.Frames
 {
     public class RepairHeartFrame : Frame
     {
-    
+
+        public override string HintSpriteName => "controls_clickdrag";
 
         Entity manEntity, handEntity, leftHeartEntity, rightHeartEntity, heartEntity, cavity1Entity, cavity2Entity;
 

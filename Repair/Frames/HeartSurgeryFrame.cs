@@ -25,7 +25,7 @@ namespace Frames
 
         SurgeryStage stage = SurgeryStage.MAN_PAN;
 
-        Entity manEntity, surgeryLineEntity, leftHeartEntity, rightHeartEntity, heartEntity, cavity1Entity, cavity2Entity, pupil1Entity, pupil2Entity;
+        Entity manEntity, surgeryLineEntity, scalpelEntity, cavity1Entity, cavity2Entity, pupil1Entity, pupil2Entity;
         int ticks1 = 0;
         int ticks2 = 23;
         Vector2 pupil2point = new Vector2(510, 300);
@@ -62,24 +62,6 @@ namespace Frames
             cavity2Entity.Transform.SetScale(0.2f);
             cavity2Entity.SetEnabled(false);
 
-            //var leftHeart = scene.Content.Load<Texture2D>("leftheart");
-            //leftHeartEntity = CreateEntity("leftHeart");
-            //leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
-            //leftHeartEntity.Transform.Position = new Vector2(400, 400);
-            //leftHeartEntity.Transform.SetScale(0.2f);
-
-            //var rightHeart = scene.Content.Load<Texture2D>("heartright");
-            //rightHeartEntity = CreateEntity("rightHeart");
-            //rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
-            //rightHeartEntity.Transform.Position = new Vector2(400, 400);
-            //rightHeartEntity.Transform.SetScale(0.2f);
-
-            //var heart = scene.Content.Load<Texture2D>("heart");
-            //heartEntity = CreateEntity("heart");
-            //heartEntity.AddComponent(new SpriteRenderer(heart));
-            //heartEntity.Transform.Position = new Vector2(400, 400);
-            //heartEntity.Transform.SetScale(0.2f);
-
             var pupil2 = scene.Content.Load<Texture2D>("pupil2");
             pupil2Entity = CreateEntity("pupil2");
             pupil2Entity.AddComponent(new SpriteRenderer(pupil2));
@@ -98,7 +80,11 @@ namespace Frames
             surgeryLineEntity.Transform.Position = new Vector2(370, 860);
             surgeryLineEntity.Transform.SetScale(0.2f);
 
-
+            var scalpel = scene.Content.Load<Texture2D>("surgeonknife");
+            scalpelEntity = CreateEntity("surgeonknife");
+            scalpelEntity.AddComponent(new SpriteRenderer(scalpel));
+            scalpelEntity.Transform.SetScale(0.1f);
+            scalpelEntity.Enabled = false;
         }
 
         public override void Update()
@@ -108,6 +94,10 @@ namespace Frames
             {
                 case SurgeryStage.MAN_PAN:
                     ManPan();
+                    break;
+                default:
+                    scalpelEntity.Position = Input.MousePosition + new Vector2(15, -45);
+                    scalpelEntity.Enabled = IsInZone;
                     break;
             }
         }

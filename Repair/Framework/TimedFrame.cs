@@ -6,7 +6,7 @@ namespace Framework
 {
     public abstract class TimedFrame : Frame
     {
-        protected float frameTime = 3.0f;
+        protected float frameTime = 1.0f;
 
         protected Action<ITimer> Timeout;
 

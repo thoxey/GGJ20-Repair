@@ -90,7 +90,7 @@ namespace Frames
             {
                 loadingIconEntity.Transform.SetRotationDegrees(loadingIconEntity.Transform.RotationDegrees + 4);
                 loadingTicks++;
-                if(loadingTicks > 120)
+                if(loadingTicks > 80)
                 {
                     state = ComputerState.PROFILE;
                     profileEntity.SetEnabled(true);
@@ -99,7 +99,7 @@ namespace Frames
             } else if (state == ComputerState.PROFILE)
             {
                 loadingTicks++;
-                if(loadingTicks > 200)
+                if(loadingTicks > 150)
                 {
                     OnFinish();
                 }
