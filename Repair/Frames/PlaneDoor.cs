@@ -10,16 +10,19 @@ namespace Frames
 {
     public class PlaneDoor : DrawFrame
     {
+        private Entity door, planer;
+
         public override void Init()
         {
             base.Init();
             SetupDoor();
+            SetupPlaner();
         }
 
         private void SetupDoor()
         {
             var doorTexture = Core.Scene.Content.Load<Texture2D>("door");
-            var door = CreateEntity("door");
+            door = CreateEntity("door");
             door.AddComponent(new SpriteRenderer(doorTexture));
             var width = Core.GraphicsDevice.Viewport.Width;
             var height = Core.GraphicsDevice.Viewport.Height;
@@ -29,10 +32,19 @@ namespace Frames
             SetUpDrawArea(.8f, new Vector2(185, 395), new Vector2(840, 435));
         }
 
+        private void SetupPlaner()
+        {
+            var planerTexture = Core.Scene.Content.Load<Texture2D>("planer");
+            planer = CreateEntity("door");
+            planer.AddComponent(new SpriteRenderer(planerTexture));
+            planer.Transform.SetScale(0.08f);
+        }
+
         public override void Update()
         {
             base.Update();
-
+            planer.Enabled = IsInZone;
+            planer.Transform.Position = Input.MousePosition + new Vector2(0, -30);
         }
 
         protected override void AreaFilled()
@@ -44,6 +56,7 @@ namespace Frames
 
         public override void OnNodeAdded(Vector2 NodePos)
         {
+            door.Transform.Position += new Vector2(0f, 1f);
         }
     }
 }

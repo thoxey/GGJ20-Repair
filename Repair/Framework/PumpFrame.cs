@@ -15,8 +15,8 @@ namespace Framework
         protected float mPumpPotential = 0.0f;
 
         protected float mPumpPotentialAcceleration = 50.0f;
-        protected float mPumpPotentialStartSpeed = 7.0f;
-        protected float mPumpPotentialSpeed = 7.0f;
+        protected float mPumpPotentialStartSpeed = 15.0f;
+        protected float mPumpPotentialSpeed = 15.0f;
         protected float mPumpPotentialLimit = 0.1f;
         protected float mPressureProportion = 0.0f;
         protected float mMaxPressure = 3.0f;

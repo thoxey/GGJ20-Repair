@@ -31,15 +31,13 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
-
-            frames.Enqueue(new PaintingBalanceFrame());
-
             frames.Enqueue(new TitleFrame("title_repair"));
 
             frames.Enqueue(new TitleFrame("title_job_handiman"));
             frames.Enqueue(new TitleFrame("title_hangpainting"));
             frames.Enqueue(new PaintingBalanceFrame());
             frames.Enqueue(new TitleFrame("title_planedoor"));
+            frames.Enqueue(new PlaneDoor());
             frames.Enqueue(new TitleFrame("title_plunge"));
 
             frames.Enqueue(new TitleFrame("title_job_mechanic"));

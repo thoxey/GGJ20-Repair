@@ -23,7 +23,6 @@ namespace Repair.Frames
             mGauge = true;
             base.Init();
 
-            mPumpPotentialStartSpeed = 4.0f;
             var scene = Core.Scene;
             var tyre = scene.Content.Load<Texture2D>("tire");
             tyreEntity = CreateEntity("tire");
@@ -56,19 +55,6 @@ namespace Repair.Frames
             footEntity.AddComponent(new SpriteRenderer(foot));
             footEntity.Transform.SetPosition(legStartPosition);
             footEntity.Transform.SetScale(0.2f);
-
-            //var hand = scene.Content.Load<Texture2D>("hand");
-            //handEntity = CreateEntity("hand");
-            //handEntity.AddComponent(new SpriteRenderer(hand));
-            //handEntity.Transform.Position = new Vector2(400, 400);
-            //handEntity.Transform.SetScale(0.05f);
-            //handEntity.SetEnabled(false);
-
-            //handEntity.AddComponent(new GrabberComponent());
-            //footEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
-            //pumpBaseEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
-            //pumpPeddleEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
-            //tyreEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
         }
         public override void Update()
         {
