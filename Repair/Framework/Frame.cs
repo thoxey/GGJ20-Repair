@@ -29,12 +29,6 @@ namespace Framework
         
         }
 
-
-        public virtual void Draw()
-        {
-
-        }
-
         public virtual void OnFinish()
         {
             foreach(var entity in props)

@@ -58,10 +58,12 @@
     <Compile Include="Framework\DrawFrame.cs" />
     <Compile Include="Frames\HeartSurgeryFrame.cs" />
     <Compile Include="Frames\WheelAlignmentFrame.cs" />
+    <Compile Include="Frames\ScoreFrame.cs" />
     <Compile Include="Framework\FollowMouseComponent.cs" />
     <Compile Include="Frames\RepairHeartFrame.cs" />
     <Compile Include="Framework\GrabableComponent.cs" />
     <Compile Include="Framework\GrabberComponent.cs" />
+    <Compile Include="Frames\PlaneDoor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

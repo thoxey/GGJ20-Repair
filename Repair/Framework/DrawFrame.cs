@@ -7,20 +7,19 @@ using Nez.Sprites;
 using System.Collections.Generic;
 namespace Repair.Framework
 {
-    public class DrawFrame : Frame
+    public abstract class DrawFrame : Frame
     {
         List<Vector2> nodes = new List<Vector2>();
         Vector2 MinBox, MaxBox;
-        static float nodeSize = 10.0f;
+        readonly float nodeSize = 15.0f;
         int MaxNumber;
         float percentageToComplete;
         bool drawActive = false;
 
-        public DrawFrame()
-        {
-        }
+        protected bool IsInZone => Input.MousePosition.X > MinBox.X && Input.MousePosition.X < MaxBox.X &&
+                                   Input.MousePosition.Y > MinBox.Y && Input.MousePosition.Y < MaxBox.Y;
 
-        public void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
+        protected void SetUpDrawArea(float requiredAmount, Vector2 minBox, Vector2 maxBox)
         {
             MinBox = minBox;
             MaxBox = maxBox;
@@ -34,7 +33,15 @@ namespace Repair.Framework
 
         public override void Update()
         {
-            if (drawActive && Input.LeftMouseButtonDown)
+            if (drawActive)
+            {
+                CheckForInput();
+            }
+        }
+
+        private void CheckForInput()
+        {
+            if (Input.LeftMouseButtonDown && IsInZone)
             {
                 bool overlapped = false;
                 foreach (Vector2 node in nodes)
@@ -48,6 +55,7 @@ namespace Repair.Framework
                 if (!overlapped)
                 {
                     nodes.Add(Input.MousePosition);
+                    OnNodeAdded(Input.MousePosition);
                 }
 
                 if (nodes.Count > MaxNumber * percentageToComplete)
@@ -57,10 +65,12 @@ namespace Repair.Framework
             }
         }
 
-        public virtual void AreaFilled()
+        protected virtual void AreaFilled()
         {
             drawActive = false;
         }
+
+        public abstract void OnNodeAdded(Vector2 NodePos);
     }
 }
 

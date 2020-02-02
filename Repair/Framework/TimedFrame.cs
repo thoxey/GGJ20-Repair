@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework.Input;
 using Nez;
 
 namespace Framework
@@ -7,7 +8,7 @@ namespace Framework
     {
         protected float frameTime = 3.0f;
 
-        private Action<ITimer> Timeout;
+        protected Action<ITimer> Timeout;
 
         public override void Init()
         {
