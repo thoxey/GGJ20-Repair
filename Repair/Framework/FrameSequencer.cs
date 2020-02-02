@@ -36,7 +36,9 @@ namespace Framework
             frames.Enqueue(new TitleFrame("title_hangpainting"));
             frames.Enqueue(new PaintingBalanceFrame());
             frames.Enqueue(new TitleFrame("title_planedoor"));
+            frames.Enqueue(new PlaneDoor());
             frames.Enqueue(new TitleFrame("title_plunge"));
+            frames.Enqueue(new PlungeToiletFrame());
             frames.Enqueue(new TitleFrame("title_job_mechanic"));
             frames.Enqueue(new TitleFrame("title_pumptyres"));
             frames.Enqueue(new PumpTyreFrame());
@@ -48,6 +50,7 @@ namespace Framework
             frames.Enqueue(new TitleFrame("title_replaceparts"));
             frames.Enqueue(new ReplacePartFrame());
             frames.Enqueue(new TitleFrame("title_cleardust"));
+            frames.Enqueue(new DustComputerFrame());
             frames.Enqueue(new TitleFrame("title_restart"));
             frames.Enqueue(new TurnItOnAndOffFrame());
             frames.Enqueue(new TitleFrame("title_job_doctor"));
