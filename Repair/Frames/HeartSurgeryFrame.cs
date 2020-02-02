@@ -47,20 +47,7 @@ namespace Frames
             manEntity.AddComponent(new SpriteRenderer(man));
             manEntity.Transform.Position = new Vector2(400, 1000);
             manEntity.Transform.SetScale(0.5f);
-
-            var cavity1 = scene.Content.Load<Texture2D>("cavity");
-            cavity1Entity = CreateEntity("cavity1");
-            cavity1Entity.AddComponent(new SpriteRenderer(cavity1));
-            cavity1Entity.Transform.Position = new Vector2(370, 260);
-            cavity1Entity.Transform.SetScale(0.2f);
-            cavity1Entity.SetEnabled(false);
-
-            var cavity2 = scene.Content.Load<Texture2D>("cavity2");
-            cavity2Entity = CreateEntity("cavity2");
-            cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
-            cavity2Entity.Transform.Position = new Vector2(370, 260);
-            cavity2Entity.Transform.SetScale(0.2f);
-            cavity2Entity.SetEnabled(false);
+            manEntity.GetComponent<SpriteRenderer>().SetLayerDepth(0.9f);
 
             var pupil2 = scene.Content.Load<Texture2D>("pupil2");
             pupil2Entity = CreateEntity("pupil2");
@@ -79,12 +66,27 @@ namespace Frames
             surgeryLineEntity.AddComponent(new SpriteRenderer(surgeryLine));
             surgeryLineEntity.Transform.Position = new Vector2(370, 860);
             surgeryLineEntity.Transform.SetScale(0.2f);
+            surgeryLineEntity.GetComponent<SpriteRenderer>().SetLayerDepth(0.2f);
 
             var scalpel = scene.Content.Load<Texture2D>("surgeonknife");
             scalpelEntity = CreateEntity("surgeonknife");
             scalpelEntity.AddComponent(new SpriteRenderer(scalpel));
             scalpelEntity.Transform.SetScale(0.1f);
             scalpelEntity.Enabled = false;
+            scalpelEntity.AddComponent<Framework.ParticleSpriteSpawner>();
+            List<string> spriteNames = new List<string>();
+            //spriteNames.Add("curl0");
+            //spriteNames.Add("curl1");
+            //spriteNames.Add("curl2");
+            //spriteNames.Add("curl3");
+            //spriteNames.Add("curl4");
+            //spriteNames.Add("curl5");
+            spriteNames.Add("drop0");
+            spriteNames.Add("drop1");
+            spriteNames.Add("drop2");
+            spriteNames.Add("drop3");
+
+            scalpelEntity.GetComponent<Framework.ParticleSpriteSpawner>().InitParticleSystem(ShouldSpawnBlood, spriteNames, 1.0f, new Vector2(10000000, 0), new Vector2(0, 5000000), 0.1f, 180, 0.0f);
         }
 
         public override void Update()
@@ -101,6 +103,12 @@ namespace Frames
                     break;
             }
         }
+
+        public bool ShouldSpawnBlood()
+        {
+            return pressing;
+        }
+
 
         public void ManPan() {
             Vector2 translate = new Vector2(0,-5.0f);
@@ -133,22 +141,20 @@ namespace Frames
 
         }
 
-        int splatterCount;
-
         public override void OnNodeAdded(Vector2 NodePos)
         {
-            if(splatterCount % 2 == 0)
-            {
-                var splatterTexture = GetRandomBloodSplatter();
-                var splat = CreateEntity("Splatter" + (splatterCount++).ToString());
-                splat.AddComponent(new SpriteRenderer(splatterTexture));
-                splat.Transform.Position = NodePos;
-                splat.Transform.SetScale(0.2f);
-            }
-            else
-            {
-                splatterCount++;
-            }
+            //if(splatterCount % 2 == 0)
+            //{
+            //    var splatterTexture = GetRandomBloodSplatter();
+            //    var splat = CreateEntity("Splatter" + (splatterCount++).ToString());
+            //    splat.AddComponent(new SpriteRenderer(splatterTexture));
+            //    splat.Transform.Position = NodePos;
+            //    splat.Transform.SetScale(0.2f);
+            //}
+            //else
+            //{
+            //    splatterCount++;
+            //}
         }
 
         List<string> masterSplatters = new List<string> { "drop0", "drop1", "drop2", "drop3" };

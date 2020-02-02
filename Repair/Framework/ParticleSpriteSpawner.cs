@@ -28,6 +28,7 @@ namespace Framework
 
         private Vector2 startVelocity, jitter;
 
+
         List<(Entity, Composite, long)> particles = new List<(Entity, Composite, long)>();
 
         public void InitParticleSystem(Func<bool> shouldSpawnGetter, List<string> spriteNames, float speedMultiplier, Vector2 startVelocity, Vector2 jitter, float scaleSprites = 1.0f, float degreesRotateSprite = 0.0f, float depth = 0.0f)
@@ -68,12 +69,8 @@ namespace Framework
                 particle.Item1.Destroy();
                 world.RemoveComposite(particle.Item2);
                 particlesToClear.Add(particle);
-
             }
-            foreach (var particleToRemove in particlesToClear)
-            {
-                particles.Remove(particleToRemove);
-            }
+            particles.Clear();
         }
 
             public void Update()

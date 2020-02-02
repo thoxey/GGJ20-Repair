@@ -38,6 +38,21 @@ namespace Frames
             planer = CreateEntity("door");
             planer.AddComponent(new SpriteRenderer(planerTexture));
             planer.Transform.SetScale(0.08f);
+            var component = new Framework.ParticleSpriteSpawner();
+            List<string> spriteNames = new List<string>();
+            spriteNames.Add("curl0");
+            spriteNames.Add("curl1");
+            spriteNames.Add("curl2");
+            spriteNames.Add("curl3");
+            spriteNames.Add("curl4");
+            spriteNames.Add("curl5");
+            component.InitParticleSystem(ShouldSpawnWater, spriteNames, 1.0f, new Vector2(-5000000.0f, -5000000.0f), new Vector2(5000000.0f, 5.0f), 0.15f, 180, 0.0f);
+            planer.AddComponent(component);
+        }
+
+        public bool ShouldSpawnWater()
+        {
+            return pressing;
         }
 
         public override void Update()

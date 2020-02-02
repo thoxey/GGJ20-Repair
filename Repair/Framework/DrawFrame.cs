@@ -17,6 +17,7 @@ namespace Repair.Framework
         int MaxNumber;
         float percentageToComplete;
         bool drawActive = false;
+        protected bool pressing = false;
 
         protected bool IsInZone => Input.MousePosition.X > MinBox.X && Input.MousePosition.X < MaxBox.X &&
                                    Input.MousePosition.Y > MinBox.Y && Input.MousePosition.Y < MaxBox.Y;
@@ -46,6 +47,7 @@ namespace Repair.Framework
         {
             if (Input.LeftMouseButtonDown && IsInZone)
             {
+                pressing = true;
                 bool overlapped = false;
                 foreach (Vector2 node in nodes)
                 {
@@ -65,6 +67,10 @@ namespace Repair.Framework
                 {
                     AreaFilled();
                 }
+            }
+            else
+            {
+                pressing = false;
             }
         }
 
