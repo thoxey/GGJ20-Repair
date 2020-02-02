@@ -9,13 +9,15 @@ namespace Repair.Framework
         private float mRadius = 0.0f;
         private bool mBeingGrabbed = false;
         private Entity mCursor;
-        public GrabableComponent(float radius, Entity cursor)
+        int mPriority = 0;
+        public GrabableComponent(float radius, Entity cursor, int priority = 0)
         {
             mRadius = radius;
             if(cursor.GetComponent<GrabberComponent>() != null) 
             {
                 mCursor = cursor;
             }
+            mPriority = priority;
             Console.WriteLine("started " + grabid++);
         }
         public void Update()
@@ -28,11 +30,10 @@ namespace Repair.Framework
                     GrabberComponent component = mCursor.GetComponent<GrabberComponent>();
                     lock (component)
                     {
-                        if (Input.LeftMouseButtonPressed && !component.IsGrabbing())
+                        if (Input.LeftMouseButtonPressed && component.CanGrab(mPriority))
                         {
                             mBeingGrabbed = true;
                             component.Grab();
-
                         }
                     }
                 }
@@ -47,6 +48,10 @@ namespace Repair.Framework
                     mCursor.GetComponent<GrabberComponent>().LetGo();
                 }
             
+        }
+        public int GetPriority()
+        {
+            return mPriority;
         }
         public bool IsInsideRadius(Vector2 position) 
         {

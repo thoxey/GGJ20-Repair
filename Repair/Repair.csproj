@@ -64,6 +64,8 @@
     <Compile Include="Framework\GrabableComponent.cs" />
     <Compile Include="Framework\GrabberComponent.cs" />
     <Compile Include="Frames\PlaneDoor.cs" />
+    <Compile Include="Frames\ReplaceLightsFrame.cs" />
+    <Compile Include="Frames\ReplacePartFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -41,13 +41,12 @@ namespace Frames
         {
             base.Init();
             var scene = Core.Scene;
+
             var man = scene.Content.Load<Texture2D>("man");
             manEntity = CreateEntity("manforsurgery");
             manEntity.AddComponent(new SpriteRenderer(man));
             manEntity.Transform.Position = new Vector2(400, 1000);
             manEntity.Transform.SetScale(0.5f);
-
-
 
             var cavity1 = scene.Content.Load<Texture2D>("cavity");
             cavity1Entity = CreateEntity("cavity1");
@@ -127,7 +126,8 @@ namespace Frames
             pupil2point += translate;
             pupil1Entity.Transform.SetPosition(pupil1point + translate2);
             pupil2Entity.Transform.SetPosition(pupil2point + translate3);
-            if (manEntity.Transform.Position.Y < 400) { 
+            if (manEntity.Transform.Position.Y < 400) {
+                manEntity.Transform.SetPosition(manEntity.Transform.Position.X, 400);
                 stage = SurgeryStage.CUT;
                 SetUpDrawArea(0.4f, new Vector2(318, 82), new Vector2(413, 418));
             }

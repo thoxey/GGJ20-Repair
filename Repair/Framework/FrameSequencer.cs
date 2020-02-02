@@ -1,4 +1,5 @@
 ﻿using Frames;
+using Repair.Frames;
 using System.Collections.Generic;
 
 namespace Framework
@@ -41,8 +42,10 @@ namespace Framework
             frames.Enqueue(new TitleFrame("title_alignwheels"));
             frames.Enqueue(new WheelAlignmentFrame());
             frames.Enqueue(new TitleFrame("title_replacelights"));
+            frames.Enqueue(new ReplaceLightsFrame());
             frames.Enqueue(new TitleFrame("job_it"));
             frames.Enqueue(new TitleFrame("title_replaceparts"));
+            frames.Enqueue(new ReplacePartFrame());
             frames.Enqueue(new TitleFrame("title_cleardust"));
             frames.Enqueue(new TitleFrame("title_restart"));
             frames.Enqueue(new TurnItOnAndOffFrame());

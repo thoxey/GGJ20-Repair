@@ -38,22 +38,18 @@ namespace Repair.Frames
             cavity1Entity.Transform.Position = new Vector2(370, 260);
             cavity1Entity.Transform.SetScale(0.2f);
 
-            var cavity2 = scene.Content.Load<Texture2D>("cavity2");
-            cavity2Entity = CreateEntity("cavity2");
-            cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
-            cavity2Entity.Transform.Position = new Vector2(370, 260);
-            cavity2Entity.Transform.SetScale(0.2f);
+
 
             var rightHeart = scene.Content.Load<Texture2D>("heartright");
             rightHeartEntity = CreateEntity("rightHeart");
             rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
-            rightHeartEntity.Transform.Position = new Vector2(400, 400);
+            rightHeartEntity.Transform.Position = new Vector2(371, 267);
             rightHeartEntity.Transform.SetScale(0.2f);
 
             var leftHeart = scene.Content.Load<Texture2D>("leftheart");
             leftHeartEntity = CreateEntity("leftHeart");
             leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
-            leftHeartEntity.Transform.Position = new Vector2(400, 400);
+            leftHeartEntity.Transform.Position = new Vector2(360, 277);
             leftHeartEntity.Transform.SetScale(0.2f);
 
             var heart = scene.Content.Load<Texture2D>("heart");
@@ -62,6 +58,12 @@ namespace Repair.Frames
             heartEntity.Transform.Position = new Vector2(400, 400);
             heartEntity.Transform.SetScale(0.2f);
             heartEntity.SetEnabled(false);
+
+            var cavity2 = scene.Content.Load<Texture2D>("cavity2");
+            cavity2Entity = CreateEntity("cavity2");
+            cavity2Entity.AddComponent(new SpriteRenderer(cavity2));
+            cavity2Entity.Transform.Position = new Vector2(370, 260);
+            cavity2Entity.Transform.SetScale(0.2f);
 
             var hand = scene.Content.Load<Texture2D>("hand");
             handEntity = CreateEntity("hand");

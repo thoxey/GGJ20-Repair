@@ -56,9 +56,16 @@ namespace Repair.Framework
             Console.WriteLine("Disabled");
         }
 
-        public bool IsGrabbing()
+        public bool CanGrab(int priority)
         {
-            return mGrabbing;
+            foreach(Entity entity in mEntitiesHoveringOver)
+            {
+                if(entity.GetComponent<GrabableComponent>().GetPriority() > priority)
+                {
+                    return false;
+                }
+            }
+            return !mGrabbing;
         }
 
         public void Grab()
