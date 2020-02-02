@@ -31,11 +31,10 @@ namespace Framework
 
         private void LoadFrameSequence()
         {
-            //frames.Enqueue(new TitleFrame("Pizza Wizard"));
             //frames.Enqueue(new PaintingBalanceFrame());
             //frames.Enqueue(new WheelAlignmentFrame());
             //frames.Enqueue(new TurnItOnAndOffFrame());
-            //frames.Enqueue(new TitleFrame("Pizza Wizard"));
+            //frames.Enqueue(new HeartSurgeryFrame());
             frames.Enqueue(new RepairHeartFrame());
         }
     }

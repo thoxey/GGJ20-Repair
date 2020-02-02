@@ -15,7 +15,7 @@ namespace Repair.Frames
 
         Entity manEntity, handEntity, leftHeartEntity, rightHeartEntity, heartEntity, cavity1Entity, cavity2Entity;
 
-        bool heartRepaired = false;
+        bool mHeartRepaired = false;
 
         public RepairHeartFrame()
         {
@@ -44,57 +44,70 @@ namespace Repair.Frames
             cavity2Entity.Transform.Position = new Vector2(370, 260);
             cavity2Entity.Transform.SetScale(0.2f);
 
-            var leftHeart = scene.Content.Load<Texture2D>("leftheart");
-            leftHeartEntity = CreateEntity("leftHeart");
-            leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
-            leftHeartEntity.Transform.Position = new Vector2(400, 400);
-            leftHeartEntity.Transform.SetScale(0.2f);
-            leftHeartEntity.AddComponent(new BoxCollider());
-
             var rightHeart = scene.Content.Load<Texture2D>("heartright");
             rightHeartEntity = CreateEntity("rightHeart");
             rightHeartEntity.AddComponent(new SpriteRenderer(rightHeart));
             rightHeartEntity.Transform.Position = new Vector2(400, 400);
             rightHeartEntity.Transform.SetScale(0.2f);
 
+            var leftHeart = scene.Content.Load<Texture2D>("leftheart");
+            leftHeartEntity = CreateEntity("leftHeart");
+            leftHeartEntity.AddComponent(new SpriteRenderer(leftHeart));
+            leftHeartEntity.Transform.Position = new Vector2(400, 400);
+            leftHeartEntity.Transform.SetScale(0.2f);
+
+            var heart = scene.Content.Load<Texture2D>("heart");
+            heartEntity = CreateEntity("heart");
+            heartEntity.AddComponent(new SpriteRenderer(heart));
+            heartEntity.Transform.Position = new Vector2(400, 400);
+            heartEntity.Transform.SetScale(0.2f);
+            heartEntity.SetEnabled(false);
+
             var hand = scene.Content.Load<Texture2D>("hand");
             handEntity = CreateEntity("hand");
             handEntity.AddComponent(new SpriteRenderer(hand));
             handEntity.Transform.Position = new Vector2(400, 400);
-            handEntity.Transform.SetScale(0.2f);
+            handEntity.Transform.SetScale(0.05f);
             handEntity.SetEnabled(false);
-            handEntity.AddComponent(new BoxCollider());
 
-            //var heart = scene.Content.Load<Texture2D>("heart");
-            //heartEntity = CreateEntity("heart");
-            //heartEntity.AddComponent(new SpriteRenderer(heart));
-            //heartEntity.Transform.Position = new Vector2(400, 400);
-            //heartEntity.Transform.SetScale(0.2f);
-
-
+            handEntity.AddComponent(new GrabberComponent());
+            leftHeartEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
+            rightHeartEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
+            heartEntity.AddComponent(new GrabableComponent(80.0f, handEntity));
         }
 
         public override void Update()
         {
-            handEntity.Transform.SetPosition(Input.MousePosition);
-            CollisionResult result;
-            if (handEntity.GetComponent<Collider>().Overlaps(leftHeartEntity.GetComponent<Collider>()))
+            if (!mHeartRepaired)
             {
-                handEntity.SetEnabled(true);
+                TryToCompleteHeart();
             }
             else
             {
-                handEntity.SetEnabled(false);
+                ReceiveHeart();
             }
-
         }
 
-        public void ManPan()
+        private void TryToCompleteHeart()
         {
-
+            Vector2 difference = rightHeartEntity.Transform.Position - leftHeartEntity.Transform.Position;
+            if( Math.Abs(difference.Y) < 20.0f && difference.X > 50.0f && difference.X < 100.0f)
+            {
+                heartEntity.SetEnabled(true);
+                leftHeartEntity.SetEnabled(false);
+                rightHeartEntity.SetEnabled(false);
+                heartEntity.Transform.SetPosition(leftHeartEntity.Transform.Position + difference / 2.0f);
+                handEntity.GetComponent<GrabberComponent>().LetGo();
+                mHeartRepaired = true;
+            }
         }
 
-       
-
+        public void ReceiveHeart()
+        {
+            if (heartEntity.GetComponent<GrabableComponent>().IsInsideRadius(cavity2Entity.Transform.Position))
+            {
+                OnFinish();
+            }
+        }
     }
 }

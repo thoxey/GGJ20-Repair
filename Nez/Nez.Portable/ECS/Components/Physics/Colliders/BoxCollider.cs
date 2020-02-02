@@ -4,7 +4,7 @@ using Nez.PhysicsShapes;
 
 namespace Nez
 {
-	public class BoxCollider : Collider
+public class BoxCollider : Collider
 	{
 		[Inspectable]
 		[Range(1, float.MaxValue, true)]

@@ -60,6 +60,8 @@
     <Compile Include="Frames\WheelAlignmentFrame.cs" />
     <Compile Include="Framework\FollowMouseComponent.cs" />
     <Compile Include="Frames\RepairHeartFrame.cs" />
+    <Compile Include="Framework\GrabableComponent.cs" />
+    <Compile Include="Framework\GrabberComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
